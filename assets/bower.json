@@ -1,0 +1,15 @@
+{
+  "name": "portfolio",
+  "homepage": "https://github.com/kdaguenet/wp-portfolio",
+  "authors": [
+    "kdaguenet <kevindaguenet@gmail.com>"
+  ],
+  "private": true,
+  "description": "quick portfolio theme",
+  "dependencies": {
+    "foundation": "~5.5.3",
+    "jquery": "~2.2.0",
+    "jquery-ui": "~1.11.4",
+    "html5shiv": "~3.7.3"
+  }
+}
