@@ -27,8 +27,7 @@ module.exports = function(grunt) {
         },
         concat : {
             options: {
-                stripBanners: true,
-                sourceMap: true
+                stripBanners: true
             },
             header_js: {
                 src: [
@@ -60,12 +59,7 @@ module.exports = function(grunt) {
         },
         uglify: {
             dist: {
-                options: {
-                    sourceMap: true,
-                    sourceMapIn: function(src) {
-                        return src+'.map';
-                    }
-                },
+                options: {},
                 files: {
                     '<%= paths.dist %>/js/header.js': ['<%= paths.dist %>/js/header.js'],
                     '<%= paths.dist %>/js/vendor.js': ['<%= paths.dist %>/js/vendor.js'],
@@ -109,7 +103,6 @@ module.exports = function(grunt) {
         sass: {
             build: {
                 options: {
-                    sourceMap: true,
                     outputStyle: 'expanded',
                     includePaths: ['<%= paths.bower_components %>/foundation/scss'],
                     precision: 8
@@ -122,7 +115,6 @@ module.exports = function(grunt) {
         },
         postcss: {
             options: {
-                map: true,
                 processors: [
                     require('autoprefixer')({
                         browsers: [
