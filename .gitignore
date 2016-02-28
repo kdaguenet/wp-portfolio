@@ -1,7 +1,8 @@
 #==[assets]=========================#
 /assets/bower_components/*
 /assets/node_modules/*
-/assets/**/*.map
 /js/*.js
 /css/*.css
+/css/*.map
+/js/*.map
 .DS_Store
