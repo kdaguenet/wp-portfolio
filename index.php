@@ -3,6 +3,15 @@ get_header();
 ?>
 
 <div class="small-12">
+
+    <?php
+        $skillTab = get_option("mFSkill");
+        $descTab = get_option("mFSkillDescription");
+        if(!empty($skillTab)){
+    ?>
+        <h2> <?php echo $descTab['title']; ?> </h2>
+        <p> <?php echo $descTab['description']; ?> </p>
+    <?php } ?>
     <?php if ( have_posts() ) : ?>
 
         <?php if ( is_home() && ! is_front_page() ) : ?>

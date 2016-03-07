@@ -57,11 +57,13 @@ function mFSkill()
 
     // variables for the field and option names
     $opt_name = 'mFSkill';
+    $opt_name2 = 'mFSkillDescription';
     $hidden_field_name = 'mf_submit_hidden';
     $data_field_name = 'mFSkill';
 
     // Read in existing option value from database
     $skillTab = get_option($opt_name);
+    $descTab = get_option($opt_name2);
 
     // See if the user has posted us some information
     // If they did, this hidden field will be set to 'Y'
@@ -89,7 +91,12 @@ function mFSkill()
                     ];
                 }
             }
+
+            $descTab["title"] = $_POST["title"];
+            $descTab["description"] = $_POST["description"];
+
             update_option($opt_name, $skillTab);
+            update_option($opt_name2, $descTab);
         }
         // Put a "settings saved" message on the screen
         echo "<div class=\"updated\"><p><strong>" . __('settings saved.', 'menu-test') . "</strong></p></div>";
@@ -99,9 +106,10 @@ function mFSkill()
 
     echo '<div class="wrap">';
 
+
     // header
     echo "<h2>" . __('Add Skill List', 'menu-test') . "</h2>";
-    echo '<form name="form1" method="post" action="">';
+    echo '<form name="form2" method="post" action="">';
     echo '<input type="hidden" name="' . $hidden_field_name . '" value="Y">';
     echo '<p>' . __('Name', 'menu-test');
     echo '<input type="text" name="skillName" value="" size="20"> ';
@@ -121,9 +129,14 @@ function mFSkill()
     echo "<h2>" . __('Edit Skill List', 'menu-test') . "</h2>";
     echo "<p>" . __('To delete a skill , erase the contents of Name\'s fields', 'menu-test') . "</p>";
     // settings form
-    echo '<form name="form1" method="post" action="">';
+    echo '<form name="form3" method="post" action="">';
     echo '<input type="hidden" name="' . $hidden_field_name . '" value="Y">';
+    echo '<p>' . __('Title', 'menu-test') . '</p>';
+    echo '<input type="text" name="title" value="' . $descTab['title'] . '" size="20">';
+    echo '<p>' . __('Description', 'menu-test') . '</p>';
+    echo '<textarea name="description" >' . $descTab['description'] . '</textarea>';
     $i = 0;
+    echo '<fieldset>';
     foreach ($skillTab as $skill) {
         echo '<p>';
         echo __('Name', 'menu-test') . ' <input type="text" name="skillName-' . $i . '" value="' . $skill[0] . '" size="20"> ';
@@ -133,6 +146,7 @@ function mFSkill()
         echo '</p>';
         $i++;
     }
+    echo '</fieldset>';
     $i--;
     echo '<input type="hidden" name="fieldNumber" value="' . $i . '">';
     echo '<hr />';
