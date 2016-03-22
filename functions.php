@@ -137,14 +137,16 @@ function mFSkill()
     echo '<textarea name="description" >' . $descTab['description'] . '</textarea>';
     $i = 0;
     echo '<fieldset>';
-    foreach ($skillTab as $skill) {
-        echo '<p>';
-        echo __('Name', 'menu-test') . ' <input type="text" name="skillName-' . $i . '" value="' . $skill[0] . '" size="20"> ';
-        echo __('Name Color', 'menu-test') . ' <input type="text" name="skillNameColor-' . $i . '" value="' . $skill[2] . '" size="20"> ';
-        echo __('Currency', 'menu-test') . ' <input type="text" name="skillCurrency-' . $i . '" value="' . $skill[1] . '" size="20"> ';
-        echo __('Skill Color', 'menu-test') . ' <input type="text" name="skillCurrencyColor-' . $i . '" value="' . $skill[3] . '" size="20"> ';
-        echo '</p>';
-        $i++;
+    if($skillTab){
+        foreach ($skillTab as $skill) {
+            echo '<p>';
+            echo __('Name', 'menu-test') . ' <input type="text" name="skillName-' . $i . '" value="' . $skill[0] . '" size="20"> ';
+            echo __('Name Color', 'menu-test') . ' <input type="text" name="skillNameColor-' . $i . '" value="' . $skill[2] . '" size="20"> ';
+            echo __('Currency', 'menu-test') . ' <input type="text" name="skillCurrency-' . $i . '" value="' . $skill[1] . '" size="20"> ';
+            echo __('Skill Color', 'menu-test') . ' <input type="text" name="skillCurrencyColor-' . $i . '" value="' . $skill[3] . '" size="20"> ';
+            echo '</p>';
+            $i++;
+        }
     }
     echo '</fieldset>';
     $i--;
@@ -157,6 +159,24 @@ function mFSkill()
 
     echo '</form>';
 
-
     echo '</div>';
 }
+
+/**********
+ * Activation des sidesbar du site
+ **********/
+function myfolio_widgets_init() {
+    require get_template_directory() . '/inc/skill-widget.php';
+    register_widget( 'myFolio_Skill_Widget' );
+
+    register_sidebar( array(
+        'name'          => __( 'Content Sidebar', 'myfolio' ),
+        'id'            => 'sidebar-1',
+        'description'   => __( 'Sidebar for the main page', 'myfolio' ),
+        'before_widget' => '<section id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</section>',
+        'before_title'  => '<h2 class="section-title">',
+        'after_title'   => '</h2>',
+    ) );
+}
+add_action( 'widgets_init', 'myfolio_widgets_init' );
